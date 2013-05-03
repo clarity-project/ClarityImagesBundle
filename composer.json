@@ -12,5 +12,9 @@
         "imagine/imagine": "dev-develop"
      },
 
-     "version": "0.1"
+     "autoload": {
+        "psr-0": {
+            "Clarity\\ImagesBundle": ""
+        }
+    },
 }
