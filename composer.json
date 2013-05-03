@@ -1,0 +1,16 @@
+{
+     "name": "clarity-project/images-bundle",
+     
+     "authors": [
+        {
+            "name": "Zmicier Aliakseyeu",
+            "email": "z.aliakseyeu@gmail.com"
+        }
+     ],
+     
+     "required": {
+        "imagine/imagine": "dev-develop"
+     },
+
+     "version": "0.1"
+}
