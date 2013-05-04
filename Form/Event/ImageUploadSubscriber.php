@@ -64,7 +64,7 @@ class ImageUploadSubscriber implements EventSubscriberInterface
             // handle situation if we use our default upload strategy: SimpleUploadStrategy
             if ($strategy instanceof SimpleUploadStrategy) {
                 if (!isset($options['upload_path'])) {
-                    throw new Exception\UploadStrategyException(sprintf('You are using "%s". This upload strategy requires "%s" option. For Example "%s"', 'Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy', 'upload_path', 'web/uploads/images');
+                    throw new Exception\UploadStrategyException(sprintf('You are using "%s". This upload strategy requires "%s" option. For Example "%s"', 'Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy', 'upload_path', 'web/uploads/images'));
                 }
                 $strategy->setUploadPath($options['upload_path']);
             }
