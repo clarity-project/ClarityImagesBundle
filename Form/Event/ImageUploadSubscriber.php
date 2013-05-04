@@ -36,7 +36,7 @@ class ImageUploadSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            FormEvents::POST_BIND => 'onPostBind',
+            FormEvents::PRE_BIND => 'onPreBind',
         );
     }
 
@@ -44,7 +44,7 @@ class ImageUploadSubscriber implements EventSubscriberInterface
      * @param  DataEvent $event
      * @return DataEvent
      */
-    public function onPostBind(DataEvent $event)
+    public function onPreBind(DataEvent $event)
     {
         $form = $event->getForm();
         $options = $form->getConfig()->getType()->getOptionsResolver()->resolve();
@@ -70,6 +70,7 @@ class ImageUploadSubscriber implements EventSubscriberInterface
             }
 
             $uploadedFile = $strategy->upload($event->getData());
+            $event->setData($uploadedFile);
 
             $factory = $this->container->get('form.factory');
             // adding crop fields
@@ -81,5 +82,7 @@ class ImageUploadSubscriber implements EventSubscriberInterface
                 ->add($factory->createNamed('h', 'hidden'))
             ;
         }
+
+        return $event;
     }
 }

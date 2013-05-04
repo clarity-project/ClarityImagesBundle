@@ -50,7 +50,8 @@ class ImageUploadType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Symfony\Component\HttpFoundation\File\UploadedFile',
             'upload_strategy' => 'clarity_images.form.strategy.simple_upload',
-            'upload_path' => null
+            'upload_path' => null,
+            'compound' => true,
         ));
     }
 
