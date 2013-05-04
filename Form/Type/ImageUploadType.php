@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
  */
-class ImageCropType extends AbstractType
+class ImageUploadType extends AbstractType
 {
     /**
      * @var \Symfony\Component\EventDispatcher\EventSubscriberInterface
