@@ -11,7 +11,7 @@
     </parameters>
 
     <services>
-        <service id="clarity_images.form_type.image_upload" class="%clarity_images.form_type.image_crop.class%">
+        <service id="clarity_images.form_type.image_upload" class="%clarity_images.form_type.image_upload.class%">
             <argument type="service" id="clarity_images.form_subscriber.image_upload" />
             <tag name="form.type" alias="image_upload" />
         </service>
