@@ -2,6 +2,7 @@
     "name": "clarity-project/images-bundle",
     "description": "Symfony2 bundle for simplifying upload and cropping images",
     "keywords": ["images","symfony", "crop", "upload"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Zmicier Aliakseyeu",
