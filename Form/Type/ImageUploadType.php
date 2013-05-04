@@ -49,7 +49,8 @@ class ImageCropType extends AbstractType
 
         $resolver->setDefaults(array(
             'data_class' => 'Symfony\Component\HttpFoundation\File\UploadedFile',
-            'upload_strategy' => 'Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy',
+            'upload_strategy' => 'clarity_images.form.strategy.simple_upload',
+            'upload_path' => null
         ));
     }
 

@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Clarity\ImagesBundle\Form\Exception;
 use Clarity\ImagesBundle\Form\Strategy\UploadStrategyInterface;
+use Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -58,6 +59,14 @@ class ImageUploadSubscriber implements EventSubscriberInterface
 
             if (!$strategy instanceof UploadStrategyInterface) {
                 throw new Exception\UploadStrategyException(sprintf('Class "%s" must implement "%s"', $uploadStrategy, 'Clarity\ImagesBundle\Form\Strategy\UploadStrategyInterface'));
+            }
+
+            // handle situation if we use our default upload strategy: SimpleUploadStrategy
+            if ($strategy instanceof SimpleUploadStrategy) {
+                if (!isset($options['upload_path'])) {
+                    throw new Exception\UploadStrategyException(sprintf('You are using "%s". This upload strategy requires "%s" option. For Example "%s"', 'Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy', 'upload_path', 'web/uploads/images');
+                }
+                $strategy->setUploadPath($options['upload_path']);
             }
 
             $uploadedFile = $strategy->upload($event->getData());
