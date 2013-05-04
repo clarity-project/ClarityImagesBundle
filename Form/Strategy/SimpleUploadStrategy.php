@@ -61,6 +61,8 @@ class SimpleUploadStrategy implements UploadStrategyInterface
         $filename = sha1(uniqid(mt_rand(), true));
         $name = $filename.'.'.$file->guessExtension();
         
-        return $file->move($this->kernelDir.$this->uploadPath, $name);
+        $file->move($this->kernelDir.$this->uploadPath, $name);
+
+        return $this->uploadPath.'/'.$name;
     }
 }

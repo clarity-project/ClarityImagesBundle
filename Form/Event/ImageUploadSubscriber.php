@@ -71,16 +71,6 @@ class ImageUploadSubscriber implements EventSubscriberInterface
 
             $uploadedFile = $strategy->upload($event->getData());
             $event->setData($uploadedFile);
-
-            $factory = $this->container->get('form.factory');
-            // adding crop fields
-            $form
-                ->add($factory->createNamed('image', 'hidden', array('data' => $uploadedFile)))
-                ->add($factory->createNamed('x', 'hidden'))
-                ->add($factory->createNamed('y', 'hidden'))
-                ->add($factory->createNamed('w', 'hidden'))
-                ->add($factory->createNamed('h', 'hidden'))
-            ;
         }
 
         return $event;
