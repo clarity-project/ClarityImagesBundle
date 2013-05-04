@@ -14,11 +14,11 @@
         "imagine/imagine": "dev-develop"
     },
 
-    "target-dir": "Clarity/ImagesBundle",
-
     "autoload": {
         "psr-0": {
             "Clarity\\ImagesBundle": ""
         }
-    }
+    },
+
+    "target-dir": "Clarity/ImagesBundle",
 }
