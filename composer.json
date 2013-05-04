@@ -1,18 +1,22 @@
 {
-     "name": "clarity-project/images-bundle",
-     
-     "authors": [
+    "name": "clarity-project/images-bundle",
+    "description": "Symfony2 bundle for simplifying upload and cropping images",
+    "keywords": ["images","symfony", "crop", "upload"],
+    "authors": [
         {
             "name": "Zmicier Aliakseyeu",
             "email": "z.aliakseyeu@gmail.com"
         }
-     ],
+    ],
      
-     "require": {
+    "require": {
+        "symfony/framework-bundle": "~2.2",
         "imagine/imagine": "dev-develop"
-     },
+    },
 
-     "autoload": {
+    "target-dir": "Clarity/ImagesBundle",
+
+    "autoload": {
         "psr-0": {
             "Clarity\\ImagesBundle": ""
         }
