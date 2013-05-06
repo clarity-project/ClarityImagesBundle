@@ -1,0 +1,16 @@
+{% block image_crop_widget %}
+{% spaceless %}
+    {% if form.uri is defined %}
+    <img src="{{ asset(image) }}" />
+    <div class="hidden">
+        {{ form_widget(form.uri) }}
+        {{ form_widget(form.x) }}
+        {{ form_widget(form.y) }}
+        {{ form_widget(form.w) }}
+        {{ form_widget(form.h) }}
+    </div>
+    {% else %}
+        {{ form_widget(form) }}
+    {% endif %}
+{% endspaceless %}
+{% endblock %}

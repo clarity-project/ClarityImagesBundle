@@ -11,6 +11,8 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Clarity\ImagesBundle\Form\Exception;
 use Clarity\ImagesBundle\Form\Strategy\UploadStrategyInterface;
 use Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy;
+use Symfony\Component\Form\FormError;
+use Clarity\ImagesBundle\Form\Type\ImageCropType;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -21,6 +23,11 @@ class ImageCropSubscriber implements EventSubscriberInterface
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */
     protected $container;
+
+    /**
+     * @var ImageCropType
+     */
+    protected $formType;
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
@@ -41,13 +48,22 @@ class ImageCropSubscriber implements EventSubscriberInterface
     }
 
     /**
+     * 
+     */
+    public function setFormType(ImageCropType $type)
+    {
+        $this->formType = $type;
+    }
+
+    /**
      * @param  DataEvent $event
      * @return DataEvent
      */
     public function onPreBind(DataEvent $event)
     {
         $form = $event->getForm();
-        $options = $form->getConfig()->getType()->getOptionsResolver()->resolve();
+        $resolver = $form->getConfig()->getType()->getOptionsResolver(); 
+        $options = $resolver->resolve();
 
         if ($event->getData() instanceof UploadedFile) {
             $uploadStrategy = $options['upload_strategy'];
@@ -70,18 +86,29 @@ class ImageCropSubscriber implements EventSubscriberInterface
             }
 
             $uploadedFile = $strategy->upload($event->getData());
-            $event->setData($uploadedFile);
+            // $event->setData($uploadedFile);
 
             $factory = $this->container->get('form.factory');
             $form
                 ->add($factory->createNamed('uri', 'hidden', array(
-                    'data' => $uploadedFile
+                    'virtual' => true,
                 )))
-                ->add($factory->createNamed('x', 'hidden'))
-                ->add($factory->createNamed('y', 'hidden'))
-                ->add($factory->createNamed('w', 'hidden'))
-                ->add($factory->createNamed('h', 'hidden'))
+                ->add($factory->createNamed('x', 'hidden', array(
+                    'virtual' => true,
+                )))
+                ->add($factory->createNamed('y', 'hidden', array(
+                    'virtual' => true,
+                )))
+                ->add($factory->createNamed('w', 'hidden', array(
+                    'virtual' => true,
+                )))
+                ->add($factory->createNamed('h', 'hidden', array(
+                    'virtual' => true,
+                )))
             ;
+            $this->formType->setImage($uploadedFile);
+
+            $form->addError(new FormError('clarity.form.image_crop.error.select_area'));
         } else {
             die(var_dump($event->getData()));
         }
