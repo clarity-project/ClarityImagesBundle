@@ -74,13 +74,13 @@ class ImageCropSubscriber implements EventSubscriberInterface
 
             $factory = $this->container->get('form.factory');
             $form
-                ->add($factory->createNamed('hidden', 'uri', array(
+                ->add($factory->createNamed('uri', 'hidden', array(
                     'data' => $uploadedFile
                 )))
-                ->add($factory->createNamed('hidden', 'x'))
-                ->add($factory->createNamed('hidden', 'y'))
-                ->add($factory->createNamed('hidden', 'w'))
-                ->add($factory->createNamed('hidden', 'h'))
+                ->add($factory->createNamed('x', 'hidden'))
+                ->add($factory->createNamed('y', 'hidden'))
+                ->add($factory->createNamed('w', 'hidden'))
+                ->add($factory->createNamed('h', 'hidden'))
             ;
         } else {
             die(var_dump($event->getData()));
