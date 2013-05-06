@@ -12,7 +12,8 @@
      
     "require": {
         "symfony/framework-bundle": "~2.2",
-        "imagine/imagine": "dev-develop"
+        "imagine/imagine": "dev-develop",
+        "jfeldstein/jquery-ajax-upload": "dev-master"
     },
 
     "repositories": [
