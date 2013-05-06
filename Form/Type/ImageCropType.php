@@ -18,6 +18,11 @@ class ImageCropType extends AbstractType
     protected $subscriber;
 
     /**
+     * @var \Symfony\Component\OptionsResolver\OptionsResolverInterface
+     */
+    protected $resolver;
+
+    /**
      * @param \Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
     public function __construct(EventSubscriberInterface $subscriber)
@@ -38,7 +43,12 @@ class ImageCropType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $this->resolver = $resolver;
+
         $resolver->setDefaults(array(
+            'data_class' => 'Symfony\Component\HttpFoundation\File\UploadedFile',
+            'upload_strategy' => 'clarity_images.form.strategy.simple_upload',
+            'upload_path' => null,
             'crop_strategy' => null,
             'height' => 0,
             'width' => 0,
@@ -51,7 +61,7 @@ class ImageCropType extends AbstractType
      */
     public function getParent()
     {
-        return 'image_upload';
+        return 'file';
     }
 
     /**
