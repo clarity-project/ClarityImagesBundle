@@ -86,9 +86,9 @@ class ImageCropSubscriber implements EventSubscriberInterface
             }
 
             $uploadedFile = $strategy->upload($event->getData());
-            // $event->setData($uploadedFile);
 
             $factory = $this->container->get('form.factory');
+
             $form
                 ->add($factory->createNamed('uri', 'hidden', array(
                     'virtual' => true,
@@ -104,6 +104,9 @@ class ImageCropSubscriber implements EventSubscriberInterface
                 )))
                 ->add($factory->createNamed('h', 'hidden', array(
                     'virtual' => true,
+                )))
+                ->add($factory->createNamed('sizes', 'choice', null, array(
+                    'choices' => $options['crop_sizes'],
                 )))
             ;
             $this->formType->setImage($uploadedFile);

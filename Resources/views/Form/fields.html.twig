@@ -2,6 +2,7 @@
 {% spaceless %}
     {% if form.uri is defined %}
     <img src="{{ asset(image) }}" />
+    {{ form_widget(form.sizes) }}
     <div class="hidden">
         {{ form_widget(form.uri) }}
         {{ form_widget(form.x) }}
