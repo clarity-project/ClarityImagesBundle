@@ -15,6 +15,21 @@
         "imagine/imagine": "dev-develop"
     },
 
+    "repositories": [
+        {
+            "type": "package",
+            "version": "dev-master",
+            "package": {
+                "name": "jfeldstein/jquery-ajax-upload",
+                "source": {
+                    "url": "https://github.com/jfeldstein/jQuery.AjaxFileUpload.js.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+    ],
+
     "autoload": {
         "psr-0": {
             "Clarity\\ImagesBundle": ""
