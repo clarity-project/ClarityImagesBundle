@@ -1,5 +1,6 @@
 {% block image_crop_widget %}
 {% spaceless %}
+<div id="images_wrapper">
     {% if form.uri is defined %}
     {# it is crop #}
     <img src="{{ asset(image) }}" />
@@ -13,17 +14,19 @@
     </div>
     {% else %}
         {{ form_widget(form, {'attr': {'ajax-upload': ajax}}) }}
-        {% if ajax %}
-            <script src="{{ asset('bundles/clarityimages/vendor/jfeldstein/jquery-ajax-upload/jquery.ajaxfileupload.js') }}"></script>
-            <script type="text/javascript">
-                $('input[ajax-upload="1"]').ajaxfileupload({
-                    'action': '{{ upload_route }}',
-                    'onComplete': function(response) {
-                        alert(response);
-                    }
-                });
-            </script>
-        {% endif %}
     {% endif %}
+</div>
+{% if ajax %}
+    <script src="{{ asset('bundles/clarityimages/vendor/jfeldstein/jquery-ajax-upload/jquery.ajaxfileupload.js') }}"></script>
+    <script type="text/javascript">
+        $('input[ajax-upload="1"]').ajaxfileupload({
+            'action': '{{ upload_route }}',
+            'onComplete': function(response) {
+                $('#images_wrapper').replaceWith(response);
+                $("#previews_crop_modal").modal("show");
+            }
+        });
+    </script>
+{% endif %}
 {% endspaceless %}
 {% endblock %}
