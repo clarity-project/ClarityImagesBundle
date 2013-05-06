@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -50,9 +52,20 @@ class ImageUploadType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Symfony\Component\HttpFoundation\File\UploadedFile',
             'upload_strategy' => 'clarity_images.form.strategy.simple_upload',
+            'use_ajax' => false,
             'upload_path' => null,
-            'error_bubbling' => false,
+            'error_bubbling' => true,
+            'upload_route' => null,
         ));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['ajax'] = $options['use_ajax'];
+        $view->vars['upload_route'] = $options['upload_route'];
     }
 
     /**

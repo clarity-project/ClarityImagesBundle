@@ -66,6 +66,8 @@ class ImageCropType extends AbstractType
             'compound' => true,
             'error_bubbling' => false,
             'crop_sizes' => array(),
+            'use_ajax' => true,
+            'upload_route' => null,
         ));
     }
 
@@ -85,6 +87,9 @@ class ImageCropType extends AbstractType
         if (null !== $this->image) {
             $view->vars['image'] = $this->image;
         }
+        
+        $view->vars['ajax'] = $options['use_ajax'];
+        $view->vars['upload_route'] = $options['upload_route'];
     }
 
     /**
