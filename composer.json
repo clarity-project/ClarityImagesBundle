@@ -12,24 +12,8 @@
      
     "require": {
         "symfony/framework-bundle": "~2.2",
-        "imagine/imagine": "dev-develop",
-        "jfeldstein/jquery-ajax-upload": "dev-master"
+        "imagine/imagine": "dev-develop"
     },
-
-    "repositories": [
-        {
-            "type": "package",
-            "version": "dev-master",
-            "package": {
-                "name": "jfeldstein/jquery-ajax-upload",
-                "source": {
-                    "url": "https://github.com/jfeldstein/jQuery.AjaxFileUpload.js.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
-        }
-    ],
 
     "autoload": {
         "psr-0": {
