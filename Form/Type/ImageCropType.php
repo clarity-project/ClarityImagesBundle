@@ -36,6 +36,8 @@ class ImageCropType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addEventSubscriber($this->subscriber);
+
+        $this->resolver->setDefaults($this->resolver->resolve($options));
     }
 
     /**
