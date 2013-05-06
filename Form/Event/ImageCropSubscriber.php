@@ -110,8 +110,9 @@ class ImageCropSubscriber implements EventSubscriberInterface
                 )))
             ;
             $this->formType->setImage($uploadedFile);
-
-            $form->addError(new FormError('clarity.form.image_crop.error.select_area'));
+            if (!$options['use_ajax']) {
+                $form->addError(new FormError('clarity.form.image_crop.error.select_area'));    
+            }
         } else {
             die(var_dump($event->getData()));
         }

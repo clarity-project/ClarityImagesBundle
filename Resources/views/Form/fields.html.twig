@@ -5,7 +5,7 @@
     <img src="{{ asset(image) }}" />
     {{ form_widget(form.sizes) }}
     <div class="hidden">
-        {{ form_widget(form.uri) }}
+        {{ form_widget(form.uri, {'attr': {'value': image}}) }}
         {{ form_widget(form.x) }}
         {{ form_widget(form.y) }}
         {{ form_widget(form.w) }}
