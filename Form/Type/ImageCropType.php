@@ -84,12 +84,14 @@ class ImageCropType extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if (null !== $this->image) {
-            $view->vars['image'] = $this->image;
-        }
-        
+        $view->vars['crop'] = false;
         $view->vars['ajax'] = $options['use_ajax'];
         $view->vars['upload_route'] = $options['upload_route'];
+
+        if (null !== $this->image) {
+            $view->vars['image'] = $this->image;
+            $view->vars['crop'] = true;
+        }
     }
 
     /**

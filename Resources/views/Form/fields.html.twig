@@ -3,20 +3,28 @@
 <div id="images_wrapper">
     {% if form.uri is defined %}
     {# it is crop #}
-    <img src="{{ asset(image) }}" />
-    {{ form_widget(form.sizes) }}
+    <div class="image-wrapper row" style="text-align: center;">
+        <div style="display: inline-block; margin-bottom: 20px;"><img src="{{ asset(image) }}" crop="target" /></div>
+        <br />
+        {{ form_widget(form.sizes, {'attr': {'crop': 'sizes'}}) }}
+    </div>
     <div class="hidden">
         {{ form_widget(form.uri, {'attr': {'value': image}}) }}
-        {{ form_widget(form.x) }}
-        {{ form_widget(form.y) }}
-        {{ form_widget(form.w) }}
-        {{ form_widget(form.h) }}
+        {{ form_widget(form.x, {'attr': {'crop': 'x'}}) }}
+        {{ form_widget(form.y, {'attr': {'crop': 'y'}}) }}
+        {{ form_widget(form.w, {'attr': {'crop': 'w'}}) }}
+        {{ form_widget(form.h, {'attr': {'crop': 'h'}}) }}
     </div>
     {% else %}
         {{ form_widget(form, {'attr': {'ajax-upload': ajax}}) }}
     {% endif %}
 </div>
-{% if ajax %}
+{% if crop %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/clarityimages/vendor/tapmodo/jcrop/css/jquery.Jcrop.min.css') }}" />
+    <script src="{{ asset('bundles/clarityimages/vendor/tapmodo/jcrop/js/jquery.Jcrop.min.js') }}"></script>
+    <script src="{{ asset('bundles/clarityimages/js/jquery.cropper.js') }}"></script>
+{% endif %}
+{% if ajax and not crop %}
     <script src="{{ asset('bundles/clarityimages/vendor/jfeldstein/jquery-ajax-upload/jquery.ajaxfileupload.js') }}"></script>
     <script type="text/javascript">
         $('input[ajax-upload="1"]').ajaxfileupload({
@@ -24,6 +32,10 @@
             'onComplete': function(response) {
                 $('#images_wrapper').replaceWith(response);
                 $("#previews_crop_modal").modal("show");
+
+                $('img[crop="target"]').cropper({
+                    'action': '{{ crop_route }}',
+                });
             }
         });
     </script>
