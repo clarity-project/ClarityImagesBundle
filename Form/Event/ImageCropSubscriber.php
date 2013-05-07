@@ -142,7 +142,10 @@ class ImageCropSubscriber implements EventSubscriberInterface
                 $form->remove('x');
                 $form->remove('y');
                 
-                $event->setData($croppedFile);
+                $event->getForm()->setData(array(
+                    'uri' => $croppedFile,
+                    'size' => $data['sizes'],
+                ));
             }
         }
 

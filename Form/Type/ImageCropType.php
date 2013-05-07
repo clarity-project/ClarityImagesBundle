@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\Options;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -57,7 +58,7 @@ class ImageCropType extends AbstractType
         $this->resolver = $resolver;
 
         $resolver->setDefaults(array(
-            'data_class' => 'Symfony\Component\HttpFoundation\File\UploadedFile',
+            'data_class' => null,
             'upload_strategy' => 'clarity_images.form.strategy.simple_upload',
             'upload_path' => null,
             'crop_strategy' => 'clarity_images.form.strategy.simple_crop',
