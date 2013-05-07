@@ -60,7 +60,7 @@ class ImageCropType extends AbstractType
             'data_class' => 'Symfony\Component\HttpFoundation\File\UploadedFile',
             'upload_strategy' => 'clarity_images.form.strategy.simple_upload',
             'upload_path' => null,
-            'crop_strategy' => null,
+            'crop_strategy' => 'clarity_images.form.strategy.simple_crop',
             'height' => 0,
             'width' => 0,
             'compound' => true,
@@ -68,6 +68,7 @@ class ImageCropType extends AbstractType
             'crop_sizes' => array(),
             'use_ajax' => true,
             'upload_route' => null,
+            'crop_route' => null,
         ));
     }
 
@@ -87,6 +88,7 @@ class ImageCropType extends AbstractType
         $view->vars['crop'] = false;
         $view->vars['ajax'] = $options['use_ajax'];
         $view->vars['upload_route'] = $options['upload_route'];
+        $view->vars['crop_route'] = $options['crop_route'];
 
         if (null !== $this->image) {
             $view->vars['image'] = $this->image;

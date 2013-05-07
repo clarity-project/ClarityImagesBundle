@@ -9,7 +9,7 @@
         {{ form_widget(form.sizes, {'attr': {'crop': 'sizes'}}) }}
     </div>
     <div class="hidden">
-        {{ form_widget(form.uri, {'attr': {'value': image}}) }}
+        {{ form_widget(form.uri, {'attr': {'crop': 'image', 'value': image}}) }}
         {{ form_widget(form.x, {'attr': {'crop': 'x'}}) }}
         {{ form_widget(form.y, {'attr': {'crop': 'y'}}) }}
         {{ form_widget(form.w, {'attr': {'crop': 'w'}}) }}

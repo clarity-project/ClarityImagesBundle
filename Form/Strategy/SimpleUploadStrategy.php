@@ -25,7 +25,7 @@ class SimpleUploadStrategy implements UploadStrategyInterface
      */
     public function __construct($kernelDir)
     {
-        $this->kernelDir = $kernelDir.'/web';
+        $this->kernelDir = $kernelDir;
         $this->uploadPath = null;
     }
 

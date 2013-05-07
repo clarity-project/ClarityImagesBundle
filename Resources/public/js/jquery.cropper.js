@@ -12,12 +12,21 @@
         var $element = $('img['+settings.selector+'="target"]');
 
         $('['+settings.selector+'="sizes"]').on('change', function() {
-            c = {
-                x: 0, y:0, w: 0, h: 0
-            }
+            c = {x: 0, y:0, w: 0, h: 0};
 
             store(c);
             init();
+        });
+
+        $('['+settings.selector+'="save"]').on('click', function() {
+            var data = $('input['+settings.selector+'], select['+settings.selector+']').serialize();
+            $.post(
+                settings.action,
+                data,
+                function(response) {
+                    
+                }
+            )
         });
 
         /**

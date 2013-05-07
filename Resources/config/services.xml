@@ -10,6 +10,7 @@
         <parameter key="clarity_images.form.strategy.simple_upload.class">Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy</parameter>
         <parameter key="clarity_images.form_type.image_crop.class">Clarity\ImagesBundle\Form\Type\ImageCropType</parameter>
         <parameter key="clarity_images.form_subscriber.image_crop.class">Clarity\ImagesBundle\Form\Event\ImageCropSubscriber</parameter>
+        <parameter key="clarity_images.form.strategy.simple_crop.class">Clarity\ImagesBundle\Form\Strategy\SimpleCropStrategy</parameter>
     </parameters>
 
     <services>
@@ -24,7 +25,7 @@
         </service>
 
         <service id="clarity_images.form.strategy.simple_upload" class="%clarity_images.form.strategy.simple_upload.class%">
-            <argument>%kernel.root_dir%/../</argument>
+            <argument>%kernel.root_dir%/../web</argument>
         </service>
 
         <!-- image crop  -->
@@ -34,6 +35,10 @@
         </service>
         <service id="clarity_images.form_subscriber.image_crop" public="false" class="%clarity_images.form_subscriber.image_crop.class%">
             <argument type="service" id="service_container" />
+        </service>
+
+        <service id="clarity_images.form.strategy.simple_crop" class="%clarity_images.form.strategy.simple_crop.class%">
+            <argument>%kernel.root_dir%/../web</argument>
         </service>
 
     </services>

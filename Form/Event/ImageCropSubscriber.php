@@ -11,6 +11,8 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Clarity\ImagesBundle\Form\Exception;
 use Clarity\ImagesBundle\Form\Strategy\UploadStrategyInterface;
 use Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy;
+use Clarity\ImagesBundle\Form\Strategy\CropStrategyInterface;
+use Clarity\ImagesBundle\Form\Strategy\SimpleCropStrategy;
 use Symfony\Component\Form\FormError;
 use Clarity\ImagesBundle\Form\Type\ImageCropType;
 
@@ -48,7 +50,7 @@ class ImageCropSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * 
+     * @param ImageCropType $type
      */
     public function setFormType(ImageCropType $type)
     {
@@ -111,12 +113,81 @@ class ImageCropSubscriber implements EventSubscriberInterface
             ;
             $this->formType->setImage($uploadedFile);
             if (!$options['use_ajax']) {
-                $form->addError(new FormError('clarity.form.image_crop.error.select_area'));    
+                $form->addError(new FormError('clarity.form.image_crop.error.select_area'));
             }
         } else {
-            die(var_dump($event->getData()));
+            if (!($data = $event->getData())) {
+                $form->addError(new FormError('clarity.form.image_crop.error.select_area'));
+            }
+            
+            $cropStrategy = $options['crop_strategy'];
+
+            try {
+                $strategy = $this->container->get($cropStrategy);
+            } catch (ServiceNotFoundException $e) {
+                $strategy = new $cropStrategy();
+            }
+
+            if (!$strategy instanceof CropStrategyInterface) {
+                throw new Exception\CropStrategyException(sprintf('Class "%s" must implement "%s"', $cropStrategy, 'Clarity\ImagesBundle\Form\Strategy\CropStrategyInterface'));
+            }
+
+            $croppedFile = $strategy->crop($data);
+            die(var_dump($croppedFile));
         }
 
         return $event;
+    }
+
+    /**
+     * Crop data validation
+     * 
+     * @param  array   $data
+     * @return boolean
+     */
+    protected function isValid(array $data) 
+    {
+        if (count($data < 6)) {
+            return false;
+        }
+
+        foreach ($data as $field => $value) {
+            switch ($field) {
+                case 'uri':
+                    if ($value == '') {
+                        return false;
+                    }
+                    break;
+                case 'sizes':
+                    if (strlen($value) <= 0)  {
+                        return false;
+                    }
+                    break;
+                case 'x':
+                    if ($value < 0) {
+                        return false;
+                    }
+                    break;
+                case 'y':
+                    if ($value < 0) {
+                        return false;
+                    }
+                    break;
+                case 'w':
+                    if ($value < 1) {
+                        return false;
+                    }
+                    break;
+                case 'h':
+                    if ($value < 1) {
+                        return false;
+                    }
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        return $data;
     }
 }
