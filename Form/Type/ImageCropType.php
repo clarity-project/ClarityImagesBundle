@@ -61,14 +61,13 @@ class ImageCropType extends AbstractType
             'upload_strategy' => 'clarity_images.form.strategy.simple_upload',
             'upload_path' => null,
             'crop_strategy' => 'clarity_images.form.strategy.simple_crop',
-            'height' => 0,
-            'width' => 0,
             'compound' => true,
             'error_bubbling' => false,
             'crop_sizes' => array(),
             'use_ajax' => true,
             'upload_route' => null,
             'crop_route' => null,
+            'csrf_protection' => false,
         ));
     }
 

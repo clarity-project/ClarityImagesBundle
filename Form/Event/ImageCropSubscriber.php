@@ -132,8 +132,18 @@ class ImageCropSubscriber implements EventSubscriberInterface
                 throw new Exception\CropStrategyException(sprintf('Class "%s" must implement "%s"', $cropStrategy, 'Clarity\ImagesBundle\Form\Strategy\CropStrategyInterface'));
             }
 
-            $croppedFile = $strategy->crop($data);
-            die(var_dump($croppedFile));
+            if (!$croppedFile = $strategy->crop($data)) {
+                $form->addError(new FormError('clarity.form.image_crop.error.server_side'));
+            } else {
+                $form->remove('uri');
+                $form->remove('sizes');
+                $form->remove('h');
+                $form->remove('w');
+                $form->remove('x');
+                $form->remove('y');
+                
+                $event->setData($croppedFile);
+            }
         }
 
         return $event;

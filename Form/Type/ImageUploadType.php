@@ -56,6 +56,7 @@ class ImageUploadType extends AbstractType
             'upload_path' => null,
             'error_bubbling' => true,
             'upload_route' => null,
+            'csrf_protection' => false,
         ));
     }
 

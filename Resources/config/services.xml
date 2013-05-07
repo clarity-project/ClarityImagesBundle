@@ -11,6 +11,7 @@
         <parameter key="clarity_images.form_type.image_crop.class">Clarity\ImagesBundle\Form\Type\ImageCropType</parameter>
         <parameter key="clarity_images.form_subscriber.image_crop.class">Clarity\ImagesBundle\Form\Event\ImageCropSubscriber</parameter>
         <parameter key="clarity_images.form.strategy.simple_crop.class">Clarity\ImagesBundle\Form\Strategy\SimpleCropStrategy</parameter>
+        <parameter key="clarity_images.image.manipulator.class">Clarity\ImagesBundle\Image\Manipulator</parameter>
     </parameters>
 
     <services>
@@ -38,9 +39,12 @@
         </service>
 
         <service id="clarity_images.form.strategy.simple_crop" class="%clarity_images.form.strategy.simple_crop.class%">
+            <argument type="service" id="clarity_images.image.manipulator" />
             <argument>%kernel.root_dir%/../web</argument>
         </service>
 
+        <!-- image manipulator -->
+        <service id="clarity_images.image.manipulator" class="%clarity_images.image.manipulator.class%" />
     </services>
     
 </container>
