@@ -116,17 +116,16 @@ class ImageCropSubscriber implements EventSubscriberInterface
                 $form->addError(new FormError('clarity.form.image_crop.error.select_area'));
             }
         } else {
-            $data = $event->getData();
-            if (null === $data) {
+
+            if (null === $event->getData()) {
                 return $event;
             }
 
+            $data = $event->getData();
             if (!$this->isValid($data)) {
                 $form->addError(new FormError('clarity.form.image_crop.error.select_area'));
-
-                return $event;
             }
-
+            
             $cropStrategy = $options['crop_strategy'];
 
             try {
@@ -208,6 +207,6 @@ class ImageCropSubscriber implements EventSubscriberInterface
             }
         }
 
-        return true;
+        return $data;
     }
 }

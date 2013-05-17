@@ -68,7 +68,9 @@ class ImageUploadSubscriber implements EventSubscriberInterface
                 }
                 $strategy->setUploadPath($options['upload_path']);
             }
-
+            if ($options['pre_upload'] instanceof \Closure) {
+                $strategy = $options['pre_upload']($strategy);
+            }
             $uploadedFile = $strategy->upload($event->getData());
             $event->setData($uploadedFile);
         }
