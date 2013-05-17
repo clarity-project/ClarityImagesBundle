@@ -55,7 +55,7 @@ class Manipulator
      */
     public function resize($image, $width = 0, $height = 0, $targetPath)
     {
-        if ($width == 0 || $height == 0) {
+        if ($width == 0 && $height == 0) {
             return false;
         }
 
