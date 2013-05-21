@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -25,11 +26,17 @@ class ImageUploadType extends AbstractType
     protected $resolver;
 
     /**
+     * @var string
+     */
+    protected $strategy;
+
+    /**
      * @param \Symfony\Component\EventDispatcher\EventSubscriberInterface $subscriber
      */
     public function __construct(EventSubscriberInterface $subscriber)
     {
-        $this->subscriber = $subscriber;
+        $this->subscriber   = $subscriber;
+        $this->strategy     = 'clarity_images.form.strategy.simple_upload';
     }
 
     /**
@@ -50,12 +57,13 @@ class ImageUploadType extends AbstractType
         $this->resolver = $resolver;
 
         $resolver->setDefaults(array(
-            'data_class' => 'Symfony\Component\HttpFoundation\File\UploadedFile',
-            'upload_strategy' => 'clarity_images.form.strategy.simple_upload',
-            'use_ajax' => false,
-            'upload_path' => null,
+            'data_class' => null,
+            'upload_strategy' => $this->strategy,
+            'save_property_path' => null,
             'error_bubbling' => true,
             'upload_route' => null,
+            'use_ajax' => false,
+            'upload_path' => null,
             'csrf_protection' => false,
         ));
     }

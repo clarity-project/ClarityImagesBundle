@@ -8,6 +8,7 @@
         <parameter key="clarity_images.form_type.image_upload.class">Clarity\ImagesBundle\Form\Type\ImageUploadType</parameter>
         <parameter key="clarity_images.form_subscriber.image_upload.class">Clarity\ImagesBundle\Form\Event\ImageUploadSubscriber</parameter>
         <parameter key="clarity_images.form.strategy.simple_upload.class">Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy</parameter>
+        <parameter key="clarity_images.event_listener.file_uploader.class">Clarity\ImagesBundle\EventListener\FileUploader</parameter>
         <parameter key="clarity_images.form_type.image_crop.class">Clarity\ImagesBundle\Form\Type\ImageCropType</parameter>
         <parameter key="clarity_images.form_subscriber.image_crop.class">Clarity\ImagesBundle\Form\Event\ImageCropSubscriber</parameter>
         <parameter key="clarity_images.form.strategy.simple_crop.class">Clarity\ImagesBundle\Form\Strategy\SimpleCropStrategy</parameter>
@@ -27,6 +28,11 @@
 
         <service id="clarity_images.form.strategy.simple_upload" class="%clarity_images.form.strategy.simple_upload.class%">
             <argument>%kernel.root_dir%/../web</argument>
+        </service>
+
+        <service id="clarity_images.event_listener.file_uploader" class="%clarity_images.event_listener.file_uploader.class%">
+            <argument type="service" id="clarity_images.form_subscriber.image_upload" />
+            <tag name="doctrine.event_listener" event="prePersist" />
         </service>
 
         <!-- image crop  -->
