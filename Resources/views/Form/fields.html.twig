@@ -42,3 +42,23 @@
 {% endif %}
 {% endspaceless %}
 {% endblock %}
+
+{% block image_upload_widget %}
+{% spaceless %}
+    {% if ajax %}
+        <div ajax-upload="wrapper">
+            {{ form_widget(form, {'attr': {'ajax-upload': ajax}}) }}
+            <script src="{{ asset('bundles/clarityimages/vendor/jfeldstein/jquery-ajax-upload/jquery.ajaxfileupload.js') }}"></script>
+            <script type="text/javascript">
+                $('input[ajax-upload="1"]').ajaxfileupload({
+                    'action': '{{ upload_uri }}',
+                    'onComplete': function(response) {
+                        $('ajax-upload="wrapper"').replaceWith(response);
+                    }
+                });
+            </script>
+        </div>
+    {% endif %}
+    {{ form_widget(form) }}
+{% endspaceless %}
+{% endblock %}

@@ -61,7 +61,7 @@ class ImageUploadType extends AbstractType
             'upload_strategy' => $this->strategy,
             'save_property_path' => null,
             'error_bubbling' => true,
-            'upload_route' => null,
+            'upload_uri' => null,
             'use_ajax' => false,
             'upload_path' => null,
             'csrf_protection' => false,
@@ -74,7 +74,7 @@ class ImageUploadType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['ajax'] = $options['use_ajax'];
-        $view->vars['upload_route'] = $options['upload_route'];
+        $view->vars['upload_uri'] = $options['upload_uri'];
     }
 
     /**
