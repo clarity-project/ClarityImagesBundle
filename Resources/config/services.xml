@@ -30,6 +30,10 @@
             <argument>%kernel.root_dir%/../web</argument>
         </service>
 
+        <service id="clarity_images.form.strategy.cdn_upload" abstract="true">
+            <argument type="service" id="clarity_cdn.filemanager" />
+        </service>
+
         <service id="clarity_images.event_listener.file_uploader" class="%clarity_images.event_listener.file_uploader.class%">
             <argument type="service" id="clarity_images.form_subscriber.image_upload" />
             <tag name="doctrine.event_listener" event="prePersist" />
