@@ -111,7 +111,11 @@ class ImageUploadSubscriber implements EventSubscriberInterface
         try {
             $strategy = $this->container->get($strategyName);
         } catch (ServiceNotFoundException $e) {
-            $strategy = new $strategyName();
+            try {
+                $strategy = new $strategyName();
+            } catch (\Exception $e) {
+                throw new Exception\UploadStrategyException(sprintf('Class or service "%s" not found.', $strategyName))
+            }
         }
 
         if (!$strategy instanceof UploadStrategyInterface) {
