@@ -9,7 +9,7 @@ use Clarity\CdnBundle\Filemanager\Common\ObjectInterface;
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
  */
-abstract class AbstractUploadStrategy implements UploadStrategyInterface
+abstract class AbstractCdnUploadStrategy implements UploadStrategyInterface
 {
     /**
      * @var \Clarity\CdnBundle\Filemanager\Filemanager
