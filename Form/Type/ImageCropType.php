@@ -62,6 +62,7 @@ class ImageCropType extends AbstractType
             'upload_strategy' => 'clarity_images.form.strategy.simple_upload',
             'upload_path' => null,
             'crop_strategy' => 'clarity_images.form.strategy.simple_crop',
+            'uploadable_entity' => null,
             'compound' => true,
             'error_bubbling' => false,
             'crop_sizes' => array(),
@@ -69,6 +70,10 @@ class ImageCropType extends AbstractType
             'upload_route' => null,
             'crop_route' => null,
             'csrf_protection' => false,
+        ));
+
+        $resolver->setRequired(array(
+            'uploadable_entity'
         ));
     }
 

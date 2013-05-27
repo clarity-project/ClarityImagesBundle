@@ -60,11 +60,16 @@ class ImageUploadType extends AbstractType
             'data_class' => null,
             'upload_strategy' => $this->strategy,
             'save_property_path' => null,
+            'uploadable_class' => null,
             'error_bubbling' => true,
             'upload_uri' => null,
             'use_ajax' => false,
             'upload_path' => null,
             'csrf_protection' => false,
+        ));
+
+        $resolver->setRequired(array(
+            'uploadable_class',
         ));
     }
 

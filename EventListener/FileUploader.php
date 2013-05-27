@@ -32,7 +32,8 @@ class FileUploader
         $entity = $args->getEntity();
 
         if (null !== $this->formSubscriber->getRootDataClass()) {
-            $className = $this->formSubscriber->getRootDataClass();
+            $options = $this->formSubscriber->getOptions();
+            $className = $options['uploadable_class'];
             if ($entity instanceof $className) {
                 if (null !== $strategy = $this->formSubscriber->getStrategy()) {
                     $uploadedFile = $strategy->upload($this->formSubscriber->getFile());
