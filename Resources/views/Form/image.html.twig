@@ -6,6 +6,7 @@
 {{ form_widget(form) }}
 <a class="btn" image-role="call-form" image-destination="{{ form.vars.id }}">{{ 'clarity_image.btn.change'|trans }}</a>
 {# javascripts #}
+<script src="{{ asset('bundles/clarityimages/vendor/jfeldstein/jquery-ajax-upload/jquery.ajaxfileupload.js') }}"></script>
 <script>
     $("[image-role=call-form]").on('click', function() {
         if ($('[data-destination={{ form.vars.id }}]').length > 0 && $('[data-destination={{ form.vars.id }}]').hasClass('modal')) {

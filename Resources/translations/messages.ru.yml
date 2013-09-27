@@ -1,1 +1,6 @@
 clarity_image.btn.change: редактировать
+form.upload_image:
+    title: загрузить картинку
+    btn:
+        close: закрыть
+        upload_and_save: загрузить и сохранить

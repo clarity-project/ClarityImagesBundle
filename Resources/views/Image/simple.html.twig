@@ -2,7 +2,7 @@
 <div class="modal fade" data-destination="{{ id }}">
     <div class="modal-header">
         <a class="close" data-dismiss="modal">&times;</a>
-        <h3>{{ 'form.upload_image.title'|trans }}</h3>
+        <h3>{{ 'form.upload_image.title'|trans|capitalize }}</h3>
     </div>
     <div class="modal-body">
         <form method="post" action="{{ path('clarity_images_simple_image') }}">
@@ -10,11 +10,23 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">{{ 'form.upload_image.btn.close'|trans }}</a>
-        <a href="#" class="btn btn-primary">{{ 'form.upload_image.btn.upload'|trans }}</a>
+        <a class="btn" data-dismiss="modal">{{ 'form.upload_image.btn.close'|trans }}</a>
+        <a class="btn btn-primary" data-action="upload_close">{{ 'form.upload_image.btn.upload_and_save'|trans }}</a>
     </div>
 </div>
 <script>
-$("[data-destination={{ id }}]").modal("show");
+(function($) {
+    $("[data-destination={{ id }}]").modal("show");
+    var formAction = $('[data-destination={{ id }}] form').attr('action');
+    if (formAction.length > 0) {
+        $('[data-destination={{ id }}] input[type=file]').ajaxfileupload({
+            action: formAction,
+            submit_button: $('[data-action=upload_close]'),
+            onComplete: function(response) {
+                alert(response);
+            }
+        });    
+    }
+}(jQuery));
 </script>
 {% endspaceless %}

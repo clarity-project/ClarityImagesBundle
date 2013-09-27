@@ -1,1 +1,6 @@
 clarity_image.btn.change: edit
+form.upload_image:
+    title: upload image
+    btn:
+        close: close
+        upload_and_save: upload and save
