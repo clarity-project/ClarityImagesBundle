@@ -1,4 +1,21 @@
 {% block clarity_image_widget %}
+{% spaceless %}
+{% if form.vars.value is not null %}
+    <img src="{{ form.vars.value }}" />
+{% endif %}
 {{ form_widget(form) }}
-<a class="btn">{{ 'clarity_image.btn.change'|trans }}</a>
+<a class="btn" image-role="call-form" image-destination="{{ form.vars.id }}">{{ 'clarity_image.btn.change'|trans }}</a>
+{# javascripts #}
+<script>
+    $("[image-role=call-form]").on('click', function() {
+        $.get(
+            "{{ path('clarity_images_form_image') }}",
+            function (response) {
+                alert(response);
+            }
+        );
+    });
+</script>
+
+{% endspaceless %}
 {% endblock %}
