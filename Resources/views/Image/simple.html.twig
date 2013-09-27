@@ -1,4 +1,20 @@
-<div>
-{{ form_widget(form) }}
-{# javascript for uploading #}
+{% spaceless %}
+<div class="modal fade" data-destination="{{ id }}">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{{ 'form.upload_image.title'|trans }}</h3>
+    </div>
+    <div class="modal-body">
+        <form method="post" action="{{ path('clarity_images_simple_image') }}">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">{{ 'form.upload_image.btn.close'|trans }}</a>
+        <a href="#" class="btn btn-primary">{{ 'form.upload_image.btn.upload'|trans }}</a>
+    </div>
 </div>
+<script>
+$("[data-destination={{ id }}]").modal("show");
+</script>
+{% endspaceless %}

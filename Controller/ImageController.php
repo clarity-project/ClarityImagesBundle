@@ -20,9 +20,11 @@ class ImageController extends Controller
     public function simpleAction()
     {
         $form = $this->createForm('clarity_image_upload');
+        $id = $this->getRequest()->get('id');
 
         return $this->render('ClarityImagesBundle:Image:simple.html.twig', array(
             'form' => $form->createView(),
+            'id' => $id,
         ));
     }
 
