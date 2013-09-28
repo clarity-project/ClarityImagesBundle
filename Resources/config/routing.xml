@@ -7,4 +7,8 @@
     <route id="clarity_images_simple_image" pattern="/clarity-image/upload">
         <default key="_controller">ClarityImagesBundle:Image:simple</default>
     </route>
+
+    <route id="clarity_images_crop_image" pattern="/clarity-image/upload-crop">
+        <default key="_controller">ClarityImagesBundle:Image:crop</default>
+    </route>
 </routes>

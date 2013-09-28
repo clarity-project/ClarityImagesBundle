@@ -16,6 +16,7 @@
 
         <parameter key="clarity_images.form_type.image.class">Clarity\ImagesBundle\Form\Type\ImageType</parameter>
         <parameter key="clarity_images.form_type.image_upload.class">Clarity\ImagesBundle\Form\Type\ImageUploadType</parameter>
+        <parameter key="clarity_images.form.type.image_upload_crop.class">Clarity\ImagesBundle\Form\Type\ImageUploadCropType</parameter>
         <parameter key="clarity_images.form.strategy.abstract_cdn_strategy.class">Clarity\ImagesBundle\Form\Strategy\AbstractCdnStrategy</parameter>
     </parameters>
 
@@ -27,6 +28,10 @@
 
         <service id="clarity_images.form_type.image_upload" class="%clarity_images.form_type.image_upload.class%">
             <tag name="form.type" alias="clarity_image_upload" />
+        </service>
+
+        <service id="clarity_images.form.type.image_upload_crop" class="%clarity_images.form.type.image_upload_crop.class%">
+            <tag name="form.type" alias="clarity_image_crop" />
         </service>
 
         <service id="clarity_images.form.strategy.abstract_cdn_strategy" class="%clarity_images.form.strategy.abstract_cdn_strategy.class%" abstract="true">

@@ -56,8 +56,15 @@ class ImageController extends Controller
      */
     public function cropAction()
     {
-        $form = $this->createForm('clarity_image_upload_crop');
-
-        return $this->render();
+        $form = $this->createForm('clarity_image_crop');
+        $id = $this->getRequest()->get('id');
+        $uniqueKey = $this->getRequest()->get('unique_key');
+        
+        
+        return $this->render('ClarityImagesBundle:Image:simple.html.twig', array(
+            'form' => $form->createView(),
+            'id' => $id,
+            'unique_key' => $uniqueKey,
+        ));
     }
 }

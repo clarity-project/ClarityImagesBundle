@@ -34,6 +34,12 @@ class ImageType extends AbstractType
         $resolver->setRequired(array(
             'strategy'
         ));
+
+        $resolver->setDefaults(array(
+            'crop' => array(
+                'enabled' => false,
+            )
+        ));
     }
 
     /**
@@ -50,6 +56,7 @@ class ImageType extends AbstractType
 
         $this->session->set($uniqueKey, $sessionData);
         $view->vars['unique_key'] = $uniqueKey;
+        $view->vars['crop'] = $options['crop']['enabled'];
     }
 
     /**
