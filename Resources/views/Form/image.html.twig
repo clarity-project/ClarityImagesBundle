@@ -1,8 +1,10 @@
 {% block clarity_image_widget %}
 {% spaceless %}
+<span image-role="container{{ form.vars.id }}">
 {% if form.vars.value is not null %}
-    <img src="{{ form.vars.value }}" />
+    <img src="{{ clarity_cdn(form.vars.value) }}" style="max-width: 300px; max-height: 300px;" input-src="{{ form.vars.id }}" />
 {% endif %}
+</span>
 {{ form_widget(form) }}
 <a class="btn" image-role="call-form" image-destination="{{ form.vars.id }}">{{ 'clarity_image.btn.change'|trans }}</a>
 {# javascripts #}
@@ -12,13 +14,26 @@
         if ($('[data-destination={{ form.vars.id }}]').length > 0 && $('[data-destination={{ form.vars.id }}]').hasClass('modal')) {
             $('[data-destination={{ form.vars.id }}]').modal('show');
         } else {
-            $.get("{{ path('clarity_images_simple_image') }}", {id: "{{ form.vars.id }}"},
+            $.get("{{ path('clarity_images_simple_image') }}", {id: "{{ form.vars.id }}", unique_key: "{{ unique_key }}"},
                 function (response) {
                     $('body').append(response);
                 }
             );
         }
     });
+
+    function setImage{{ form.vars.id }}(uri, url)
+    {
+        $('#{{ form.vars.id }}').val(uri);
+        if (!($('img[input-src={{ form.vars.id }}').length > 0)) {
+            var image = $('<img input-src="{{ form.vars.id }}" style="max-width: 300px; max-height: 300px;" />');
+            $(image).appendTo('[image-role=container_{{ form.vars.id }}]');
+        }
+
+        $('img[input-src={{ form.vars.id }}').attr('src', url);
+        $("[data-destination={{ form.vars.id }}]").modal('hide');
+        $("[data-destination={{ form.vars.id }}]").remove();
+    }
 </script>
 {% endspaceless %}
 {% endblock %}

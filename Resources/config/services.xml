@@ -16,53 +16,23 @@
 
         <parameter key="clarity_images.form_type.image.class">Clarity\ImagesBundle\Form\Type\ImageType</parameter>
         <parameter key="clarity_images.form_type.image_upload.class">Clarity\ImagesBundle\Form\Type\ImageUploadType</parameter>
+        <parameter key="clarity_images.form.strategy.abstract_cdn_strategy.class">Clarity\ImagesBundle\Form\Strategy\AbstractCdnStrategy</parameter>
     </parameters>
 
     <services>
         <service id="clarity_images.form_type.image" class="%clarity_images.form_type.image.class%">
             <tag name="form.type" alias="clarity_image" />
+            <argument type="service" id="session" />
         </service>
 
         <service id="clarity_images.form_type.image_upload" class="%clarity_images.form_type.image_upload.class%">
             <tag name="form.type" alias="clarity_image_upload" />
         </service>
 
-        <!-- image upload -->
-        <!-- <service id="clarity_images.form_type.image_upload" class="%clarity_images.form_type.image_upload.class%">
-            <argument type="service" id="clarity_images.form_subscriber.image_upload" />
-            <tag name="form.type" alias="image_upload" />
-        </service>
-        <service id="clarity_images.form_subscriber.image_upload" public="false" class="%clarity_images.form_subscriber.image_upload.class%">
-            <argument type="service" id="service_container" />
-        </service>
-
-        <service id="clarity_images.form.strategy.simple_upload" class="%clarity_images.form.strategy.simple_upload.class%">
-            <argument>%kernel.root_dir%/../web</argument>
-        </service>
-
-        <service id="clarity_images.form.strategy.cdn_upload" abstract="true">
+        <service id="clarity_images.form.strategy.abstract_cdn_strategy" class="%clarity_images.form.strategy.abstract_cdn_strategy.class%" abstract="true">
             <argument type="service" id="clarity_cdn.filemanager" />
         </service>
 
-        <service id="clarity_images.event_listener.file_uploader" class="%clarity_images.event_listener.file_uploader.class%">
-            <argument type="service" id="clarity_images.form_subscriber.image_upload" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-        </service> -->
-
-        <!-- image crop  -->
-        <!-- <service id="clarity_images.form_type.image_crop" class="%clarity_images.form_type.image_crop.class%">
-            <argument type="service" id="clarity_images.form_subscriber.image_crop" />
-            <tag name="form.type" alias="image_crop" />
-        </service>
-        <service id="clarity_images.form_subscriber.image_crop" public="false" class="%clarity_images.form_subscriber.image_crop.class%">
-            <argument type="service" id="service_container" />
-        </service>
-
-        <service id="clarity_images.form.strategy.simple_crop" class="%clarity_images.form.strategy.simple_crop.class%">
-            <argument type="service" id="clarity_images.image.manipulator" />
-            <argument>%kernel.root_dir%/../web</argument>
-        </service>
- -->
         <!-- image manipulator -->
         <!-- <service id="clarity_images.image.manipulator" class="%clarity_images.image.manipulator.class%" /> -->
     </services>
