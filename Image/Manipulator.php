@@ -41,7 +41,7 @@ class Manipulator
                 new Box($coords['w'], $coords['h'])
             )
             ->save($targetPath);
-
+        
         return true;
     }
 

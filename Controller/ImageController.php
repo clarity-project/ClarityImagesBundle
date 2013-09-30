@@ -57,21 +57,23 @@ class ImageController extends Controller
      */
     public function cropAction()
     {
+        $id = $this->getRequest()->get('id');
+        $uniqueKey = $this->getRequest()->get('unique_key');
         $crop = $this->getRequest()->get('crop', false);
+        $options = $this->getRequest()->getSession()->get($uniqueKey);
+
+
         if (!$crop) {
             $form = $this->createForm('clarity_image_upload');
         } else {
             $form = $this->createForm('clarity_image_crop');
         }
-        $id = $this->getRequest()->get('id');
-        $uniqueKey = $this->getRequest()->get('unique_key');
 
         if ($this->getRequest()->isMethod('post')) {
             $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $data = $form->getData();
-                if ($data instanceof UploadedFile) {
-                    $options = $this->getRequest()->getSession()->get($uniqueKey);
+                if ($data instanceof UploadedFile) { // upload file and show crop tool
                     $image = $this->get($options['strategy'])->upload($form->getData());
                     $crop = true;
                     $form = $this->createForm('clarity_image_crop', array('uri' => $image->getUri()));
@@ -82,6 +84,16 @@ class ImageController extends Controller
                         'unique_key' => $uniqueKey,
                         'crop' => $crop
                     ));
+                } else { // crop and send json response
+                    $image = $this->get($options['crop_strategy'])->handle($data, array(
+                        'width' => $options['width'], 
+                        'height' => $options['height']
+                    ));
+                    
+                    return new Response(json_encode(array(
+                        'uri' => $image->getUri(),
+                        'url' => $image->getHttpUri(),
+                    )));
                 }
             }
         }
@@ -91,7 +103,9 @@ class ImageController extends Controller
             'form' => $form->createView(),
             'id' => $id,
             'unique_key' => $uniqueKey,
-            'crop' => $crop
+            'crop' => $crop,
+            'width' => $options['width'],
+            'height' => $options['height'],
         ));
     }
 }

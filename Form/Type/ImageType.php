@@ -54,6 +54,18 @@ class ImageType extends AbstractType
             $sessionData['strategy'] = $options['strategy'];
         }
 
+        if (isset($options['crop']['width'])) {
+            $sessionData['width'] = (int) $options['crop']['width'];
+        }
+
+        if (isset($options['crop']['height'])) {
+            $sessionData['height'] = (int) $options['crop']['height'];
+        }
+
+        if (isset($options['crop']['strategy'])) {
+            $sessionData['crop_strategy'] = $options['crop']['strategy'];
+        }        
+
         $this->session->set($uniqueKey, $sessionData);
         $view->vars['unique_key'] = $uniqueKey;
         $view->vars['crop'] = $options['crop']['enabled'];

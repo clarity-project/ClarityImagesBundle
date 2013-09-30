@@ -9,6 +9,9 @@
 {% block javascripts %}
 <script>
 (function($) {
+    var width = {{ width }};
+    var height = {{ height }};
+
     $("[data-destination={{ id }}]").modal("show");
     var formAction = $('[data-destination={{ id }}] form').attr('action');
     if (formAction.length > 0) {
@@ -19,9 +22,37 @@
                 $('[data-action=upload_close]').unbind('click').attr('data-action', 'crop_close');
                 $('[data-destination={{ id }}] .modal-body').html(response);
                 $('img#crop-{{ id }}').on('load', function() {
-                    $(this).Jcrop();
-                    $('[data-action=crop_close]').on('click', function(e) {
+                    function updateCoordinates(c)
+                    {
+                        $('[crop-input=x]').val(c.x);
+                        $('[crop-input=y]').val(c.y);
+                        $('[crop-input=w]').val(c.w);
+                        $('[crop-input=h]').val(c.h);
+                    }
 
+                    var options = {
+                        onSelect: updateCoordinates,
+                        onChange: updateCoordinates,
+                        boxWidth: 530,
+                        boxHeight: 400
+                    };
+
+                    if (width > 0 && height > 0) {
+                        options.aspectRatio = width / height;
+                    }
+
+                    $(this).Jcrop(options);
+                    $('[data-action=crop_close]').on('click', function(e) {
+                        var data = $('[data-destination={{ id }}] form').serialize();
+                        var action = $('[data-destination={{ id }}] form').attr('action');
+                        $.post(action, data, function (responseStr) {
+                            try {
+                                response = JSON.parse(responseStr);
+                                setImage{{ id }}(response.uri, response.url);
+                            } catch(e) {
+                                response = responseStr;
+                            }
+                        });
                     });
                 });
             }

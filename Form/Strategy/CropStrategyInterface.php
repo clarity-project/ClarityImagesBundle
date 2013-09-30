@@ -9,7 +9,8 @@ interface CropStrategyInterface
 {   
     /**
      * @param  array  $data
+     * @param  array  $resize
      * @return object|string
      */
-    public function crop(array $data);
+    public function handle(array $data, array $resize);
 }

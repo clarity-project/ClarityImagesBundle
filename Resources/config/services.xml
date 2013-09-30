@@ -11,13 +11,15 @@
         <parameter key="clarity_images.event_listener.file_uploader.class">Clarity\ImagesBundle\EventListener\FileUploader</parameter>
         <parameter key="clarity_images.form_type.image_crop.class">Clarity\ImagesBundle\Form\Type\ImageCropType</parameter>
         <parameter key="clarity_images.form_subscriber.image_crop.class">Clarity\ImagesBundle\Form\Event\ImageCropSubscriber</parameter>
-        <parameter key="clarity_images.form.strategy.simple_crop.class">Clarity\ImagesBundle\Form\Strategy\SimpleCropStrategy</parameter>
-        <parameter key="clarity_images.image.manipulator.class">Clarity\ImagesBundle\Image\Manipulator</parameter> -->
+        <parameter key="clarity_images.form.strategy.simple_crop.class">Clarity\ImagesBundle\Form\Strategy\SimpleCropStrategy</parameter> -->
 
         <parameter key="clarity_images.form_type.image.class">Clarity\ImagesBundle\Form\Type\ImageType</parameter>
         <parameter key="clarity_images.form_type.image_upload.class">Clarity\ImagesBundle\Form\Type\ImageUploadType</parameter>
         <parameter key="clarity_images.form.type.image_upload_crop.class">Clarity\ImagesBundle\Form\Type\ImageUploadCropType</parameter>
         <parameter key="clarity_images.form.strategy.abstract_cdn_strategy.class">Clarity\ImagesBundle\Form\Strategy\AbstractCdnStrategy</parameter>
+        <parameter key="clarity_images.form.strategy.abstract_cdn_crop_strategy.class">Clarity\ImagesBundle\Form\Strategy\AbstractCdnCropStrategy</parameter>
+
+        <parameter key="clarity_images.image.manipulator.class">Clarity\ImagesBundle\Image\Manipulator</parameter>
     </parameters>
 
     <services>
@@ -38,8 +40,13 @@
             <argument type="service" id="clarity_cdn.filemanager" />
         </service>
 
+        <service id="clarity_images.form.strategy.abstract_cdn_crop_strategy" class="%clarity_images.form.strategy.abstract_cdn_crop_strategy.class%" abstract="true">
+            <argument type="service" id="clarity_cdn.filemanager" />
+            <argument type="service" id="clarity_images.image.manipulator" />
+        </service>
+
         <!-- image manipulator -->
-        <!-- <service id="clarity_images.image.manipulator" class="%clarity_images.image.manipulator.class%" /> -->
+        <service id="clarity_images.image.manipulator" class="%clarity_images.image.manipulator.class%" />
     </services>
     
 </container>

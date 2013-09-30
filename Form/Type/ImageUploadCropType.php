@@ -17,11 +17,11 @@ class ImageUploadCropType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('uri', 'hidden')
-            ->add('x', 'hidden')
-            ->add('y', 'hidden')
-            ->add('w', 'hidden')
-            ->add('h', 'hidden')
+            ->add('uri', 'hidden', array('attr' => array('crop-input' => 'uri')))
+            ->add('x', 'hidden', array('attr' => array('crop-input' => 'x')))
+            ->add('y', 'hidden', array('attr' => array('crop-input' => 'y')))
+            ->add('w', 'hidden', array('attr' => array('crop-input' => 'w')))
+            ->add('h', 'hidden', array('attr' => array('crop-input' => 'h')))
         ;
     }
 
@@ -31,7 +31,7 @@ class ImageUploadCropType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ));
     }
 

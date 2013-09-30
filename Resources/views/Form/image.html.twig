@@ -3,7 +3,7 @@
     <div class="control-group">
         {{ form_label(form) }}
         <div class="controls">
-            <span image-role="container{{ form.vars.id }}">
+            <span image-role="container_{{ form.vars.id }}">
             {% if form.vars.value is not null and form.vars.value != "" %}
                 <img src="{{ clarity_cdn(form.vars.value) }}" style="max-width: 300px; max-height: 300px;" input-src="{{ form.vars.id }}" />
             {% endif %}
@@ -15,6 +15,7 @@
     <script src="{{ asset('bundles/clarityimages/vendor/jfeldstein/jquery-ajax-upload/jquery.ajaxfileupload.js') }}"></script>
     {% if crop %}
         <link rel="stylesheet" type="text/css" href="{{ asset('bundles/clarityimages/vendor/tapmodo/jcrop/css/jquery.Jcrop.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/clarityimages/css/custom.css') }}" />
         <script src="{{ asset('bundles/clarityimages/vendor/tapmodo/jcrop/js/jquery.Jcrop.min.js') }}"></script>
     {% endif %}
     <script>
