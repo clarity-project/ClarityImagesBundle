@@ -4,3 +4,5 @@ form.upload_image:
     btn:
         close: close
         upload_and_save: upload and save
+    crop_image:
+        title: crop image

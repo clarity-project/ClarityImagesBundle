@@ -1,11 +1,9 @@
 {% extends 'ClarityImagesBundle:Image:layout.html.twig' %}
 
-{% block title %}{{ 'form.upload_image.title'|trans|capitalize }}{% endblock %}
+{% block title %}{{ 'form.crop_image.title'|trans|capitalize }}{% endblock %}
 
 {% block body %}
-<form method="post" action="{{ path('clarity_images_simple_image', {'id': id, 'unique_key': unique_key}) }}">
-    {{ form_widget(form) }}
-</form>
+{% include 'ClarityImagesBundle:Image:crop_form.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
@@ -18,7 +16,14 @@
             action: formAction,
             submit_button: $('[data-action=upload_close]'),
             onComplete: function(response) {
-                setImage{{ id }}(response.uri, response.url);
+                $('[data-action=upload_close]').unbind('click').attr('data-action', 'crop_close');
+                $('[data-destination={{ id }}] .modal-body').html(response);
+                $('img#crop-{{ id }}').on('load', function() {
+                    $(this).Jcrop();
+                    $('[data-action=crop_close]').on('click', function(e) {
+
+                    });
+                });
             }
         });    
     }

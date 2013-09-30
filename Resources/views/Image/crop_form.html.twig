@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('clarity_images_crop_image', {'id': id, 'unique_key': unique_key, 'crop': crop}) }}">
+    {{ form_widget(form) }}
+    {% if crop == true %}
+        <img src="{{ clarity_cdn(form.uri.vars.value) }}" id="crop-{{ id }}" />
+    {% endif %}
+</form>

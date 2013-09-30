@@ -1,0 +1,18 @@
+{% spaceless %}
+<div class="modal fade" data-destination="{{ id }}">
+    {% block header %}
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <h3>{% block title %}{% endblock %}</h3>
+    </div>
+    {% endblock %}
+    <div class="modal-body">{% block body %}{% endblock %}</div>
+    <div class="modal-footer">
+    {% block footer %}
+        <a class="btn" data-dismiss="modal">{{ 'form.upload_image.btn.close'|trans }}</a>
+        <a class="btn btn-primary" data-action="upload_close">{{ 'form.upload_image.btn.upload_and_save'|trans }}</a>
+    {% endblock %}
+    </div>
+</div>
+{% block javascripts %}{% endblock %}
+{% endspaceless %}
