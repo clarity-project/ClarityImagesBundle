@@ -5,14 +5,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <!-- <parameter key="clarity_images.form_type.image_upload.class">Clarity\ImagesBundle\Form\Type\ImageUploadType</parameter>
-        <parameter key="clarity_images.form_subscriber.image_upload.class">Clarity\ImagesBundle\Form\Event\ImageUploadSubscriber</parameter>
-        <parameter key="clarity_images.form.strategy.simple_upload.class">Clarity\ImagesBundle\Form\Strategy\SimpleUploadStrategy</parameter>
-        <parameter key="clarity_images.event_listener.file_uploader.class">Clarity\ImagesBundle\EventListener\FileUploader</parameter>
-        <parameter key="clarity_images.form_type.image_crop.class">Clarity\ImagesBundle\Form\Type\ImageCropType</parameter>
-        <parameter key="clarity_images.form_subscriber.image_crop.class">Clarity\ImagesBundle\Form\Event\ImageCropSubscriber</parameter>
-        <parameter key="clarity_images.form.strategy.simple_crop.class">Clarity\ImagesBundle\Form\Strategy\SimpleCropStrategy</parameter> -->
-
         <parameter key="clarity_images.form_type.image.class">Clarity\ImagesBundle\Form\Type\ImageType</parameter>
         <parameter key="clarity_images.form_type.image_upload.class">Clarity\ImagesBundle\Form\Type\ImageUploadType</parameter>
         <parameter key="clarity_images.form.type.image_upload_crop.class">Clarity\ImagesBundle\Form\Type\ImageUploadCropType</parameter>
