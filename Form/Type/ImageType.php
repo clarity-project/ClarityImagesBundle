@@ -32,10 +32,11 @@ class ImageType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired(array(
-            'strategy'
+            'strategy',
         ));
 
         $resolver->setDefaults(array(
+            'in_collection' => false,
             'crop' => array(
                 'enabled' => false,
             )
@@ -64,6 +65,10 @@ class ImageType extends AbstractType
 
         if (isset($options['crop']['strategy'])) {
             $sessionData['crop_strategy'] = $options['crop']['strategy'];
+        }
+
+        if (isset($options['in_collection'])) {
+            $sessionData['destroy'] = !$options['in_collection'];
         }        
 
         $this->session->set($uniqueKey, $sessionData);
