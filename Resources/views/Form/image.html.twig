@@ -39,7 +39,7 @@
                 $(image).appendTo('[image-role=container_{{ form.vars.id }}]');
             }
 
-            $('img[input-src={{ form.vars.id }}').attr('src', url);
+            $('img[input-src={{ form.vars.id }}]').attr('src', url);
             $("[data-destination={{ form.vars.id }}]").modal('hide');
             $("[data-destination={{ form.vars.id }}]").remove();
         }
