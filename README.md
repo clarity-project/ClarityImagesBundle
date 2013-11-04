@@ -5,8 +5,7 @@ ClarityImagesBundle
 
 ClarityImagesBundle is an advanced implementation of file uploading via html form in symfony framework.
 ***
-It allows:
-
+### It allows:
 
 1.  Avoid creating additional entity parameter (eg. $avatarFile, $logoFile, etc.).
 2.  Move upload logic to different class which may be reusable for all uploads.
