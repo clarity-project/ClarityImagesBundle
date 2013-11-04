@@ -93,10 +93,11 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 ```
 
 In your entity class you have no need to create additional not mapped fields such as logoFile or listFile. Only $logo and $list as strings for image uri.
+If you are using `'clarity_image'` in collection type (for screenshots or something custom) please add option `'in_collection' => true`
 
 #### Upload & Crop strategies
 
-Upload strategy register
+###### Upload strategy register
 
 ``` php 
 <?php
@@ -133,7 +134,7 @@ class DemoImageStrategy extends AbstractCdnStrategy
 }
 ```
 
-Now we need just register as service and thats all
+Now we need just register our strategy class as service and thats all
 
 ``` xml
 <service id="acme_demo.form.strategy.demo_image" 
@@ -142,3 +143,32 @@ Now we need just register as service and thats all
 />
 ```
 
+###### Crop strategy register
+
+``` php
+<?php
+// src/Acme/DemoBundle/Form/Strategy/DemoImageCropStrategy.php
+
+namespace Acme\DemoBundle\Form\Strategy;
+
+use Clarity\ImagesBundle\Form\Strategy\AbstractCdnCropStrategy;
+
+/**
+ * 
+ */
+class DemoImageCropStrategy extends AbstractCdnCropStrategy
+{
+    // for now you have no abstract methods for redeclaring! It's so wonderfull, isn't it?! 
+}
+
+```
+
+Register strategy as service
+
+``` xml
+
+<service id="acme_demo.form.strategy.demo_image_crop" 
+    parent="clarity_images.form.strategy.abstract_cdn_crop_strategy" 
+    class="Acme\DemoBundle\Form\Strategy\DemoImageCropStrategy" 
+/>
+```
