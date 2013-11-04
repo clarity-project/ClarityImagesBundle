@@ -62,3 +62,83 @@ public function registerBundles()
 <a name="usage"></a>
 
 ## Usage
+
+Firstly you need to create FormType class and just use our form type as field:
+
+``` php
+<?php
+// src/Acme/DemoBundle/Form/Type/DemoType.php
+
+// ...
+public function buildForm(FormBuilderInterface $builder, array $options)
+{
+    $builder
+        ->add('logo', 'clarity_image', array(
+            'strategy' => 'acme_demo.form.strategy.demo_image',
+            'required' => true,
+        ))
+        ->add('list', 'clarity_image', array(
+            'strategy' => 'acme_demo.form.strategy.demo_image',
+            'required' => true,
+            'crop' => array(
+                'enabled' => true,
+                'strategy' => 'acme_demo.form.strategy.demo_image_crop',
+                'width' => 300,
+                'height' => 200,
+            ),
+        ))
+    ;
+}
+// ... 
+```
+
+In your entity class you have no need to create additional not mapped fields such as logoFile or listFile. Only $logo and $list as strings for image uri.
+
+#### Upload & Crop strategies
+
+Upload strategy register
+
+``` php 
+<?php
+// src/Acme/DemoBundle/Form/Strategy/DemoImageStrategy.php
+
+namespace Acme\DemoBundle\Form\Strategy;
+
+use Clarity\ImagesBundle\Form\Strategy\AbstractCdnStrategy;
+
+/**
+ * 
+ */
+class DemoImageStrategy extends AbstractCdnStrategy
+{
+    /**
+     * Name of the cdn storage to upload
+     * 
+     * {@inheritDoc}
+     */
+    public function getStorageName()
+    {
+        return 'image';
+    }
+
+    /**
+     * Cdn container name. May be computed on fly
+     * 
+     * {@inheritDoc}
+     */
+    public function getContainerName()
+    {
+        return 'posts';
+    }
+}
+```
+
+Now we need just register as service and thats all
+
+``` xml
+<service id="acme_demo.form.strategy.demo_image" 
+    parent="clarity_images.form.strategy.abstract_cdn_strategy" 
+    class="Acme\DemoBundle\Form\Strategy\DemoImageStrategy" 
+/>
+```
+
