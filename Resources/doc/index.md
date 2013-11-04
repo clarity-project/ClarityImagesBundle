@@ -93,7 +93,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 ```
 
 In your entity class you have no need to create additional not mapped fields such as logoFile or listFile. Only $logo and $list as strings for image uri.
-If you are using `'clarity_image'` in collection type (for screenshots or something custom) please add option `'in_collection' => true`
+If you are using `'clarity_image'` in collection type (for screenshots or something custom) please add option `'in_collection' => true`.
 
 #### Upload & Crop strategies
 
