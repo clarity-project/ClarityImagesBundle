@@ -3,3 +3,8 @@
     height: auto;
     border: none;
 }
+
+.clarity_image_crop img {
+    max-width: 400px;
+    max-height: 530px;
+}

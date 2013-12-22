@@ -21,13 +21,28 @@
             onComplete: function(response) {
                 $('[data-action=upload_close]').unbind('click').attr('data-action', 'crop_close');
                 $('[data-destination={{ id }}] .modal-body').html(response);
+                var cropSizes, realSizes;
                 $('img#crop-{{ id }}').on('load', function() {
+                    cropSizes = {
+                        width: this.width,
+                        height: this.height
+                    }
+                    var src = $('img#crop-{{ id }}').attr('src');
+                    $('<img src="' + src + '" />').on('load', function() {
+                        realSizes = {
+                            width: this.width,
+                            height: this.height
+                        }
+                    });
+
                     function updateCoordinates(c)
                     {
-                        $('[crop-input=x]').val(c.x);
-                        $('[crop-input=y]').val(c.y);
-                        $('[crop-input=w]').val(c.w);
-                        $('[crop-input=h]').val(c.h);
+                        var factor = realSizes.width / cropSizes.width;
+                        // console.log(realSizes);
+                        $('[crop-input=x]').val(c.x * factor);
+                        $('[crop-input=y]').val(c.y * factor);
+                        $('[crop-input=w]').val(c.w * factor);
+                        $('[crop-input=h]').val(c.h * factor);
                     }
 
                     var options = {
