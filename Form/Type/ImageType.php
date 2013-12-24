@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Clarity\ImagesBundle\Validator\Constraints\ContainsAlphanumeric;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -39,7 +40,7 @@ class ImageType extends AbstractType
             'in_collection' => false,
             'crop' => array(
                 'enabled' => false,
-            )
+            ),
         ));
     }
 
