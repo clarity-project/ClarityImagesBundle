@@ -31,9 +31,10 @@ class ImageController extends Controller
                 $options = $this->getRequest()->getSession()->get($uniqueKey);
                 $image = $this->get($options['strategy'])->upload($form->getData());
                 if (null !== $image) {
-                    if ($options['destroy']) {
-                        $this->getRequest()->getSession()->remove($uniqueKey);    
-                    }
+                    // @todo: it will be modified in new version
+                    // if ($options['destroy']) {
+                    //    $this->getRequest()->getSession()->remove($uniqueKey);    
+                    // }
                     
                     return new Response(json_encode(array(
                         'uri' => $image->getUri(),
