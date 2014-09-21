@@ -37,8 +37,8 @@ class ImageController extends Controller
                     // }
                     
                     return new Response(json_encode(array(
-                        'uri' => $image->getUri(),
-                        'url' => $image->getHttpUri(),
+                        'uri' => $image->getSchemaPath(),
+                        'url' => $image->getWebPath(),
                     )));
                 }
             }
@@ -95,8 +95,8 @@ class ImageController extends Controller
                     ));
                     
                     return new Response(json_encode(array(
-                        'uri' => $image->getUri(),
-                        'url' => $image->getHttpUri(),
+                        'uri' => $image->getSchemaPath(),
+                        'url' => $image->getWebPath(),
                     )));
                 }
             }
