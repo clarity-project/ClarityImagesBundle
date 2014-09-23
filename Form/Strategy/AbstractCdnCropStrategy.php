@@ -36,7 +36,7 @@ abstract class AbstractCdnCropStrategy implements CropStrategyInterface
     public function handle(array $data, array $resize)
     {
         $object = $this->filemanager->get($data['uri']);
-        $image = $this->manipulator->getImage($object->getPath());
+        $image = $this->manipulator->getImage($object->getFullPath());
         
         // get coord data
         $coords = array(
@@ -46,8 +46,8 @@ abstract class AbstractCdnCropStrategy implements CropStrategyInterface
             'y' => $data['y'],
         );
 
-        $fileUri = $this->filemanager->addDimensionToName($object->getUri(), $resize['width'].'x'.$resize['height']);
-        $filepath = $this->filemanager->addDimensionToName($object->getPath(), $resize['width'].'x'.$resize['height']);
+        $fileUri = $this->filemanager->addDimensionToName($object->getSchemaPath(), $resize['width'].'x'.$resize['height']);
+        $filepath = $this->filemanager->addDimensionToName($object->getFullPath(), $resize['width'].'x'.$resize['height']);
         
         // make crop
         if (!$this->manipulator->crop($image, $coords, $filepath)) {
