@@ -22,5 +22,11 @@
         }
     },
 
-    "target-dir": "Clarity/ImagesBundle"
+    "target-dir": "Clarity/ImagesBundle",
+
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
 }
