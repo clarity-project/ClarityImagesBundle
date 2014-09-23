@@ -80,7 +80,7 @@ class ImageController extends Controller
                 if ($data instanceof UploadedFile) { // upload file and show crop tool
                     $image = $this->get($options['strategy'])->upload($form->getData());
                     $crop = true;
-                    $form = $this->createForm('clarity_image_crop', array('uri' => $image->getUri()));
+                    $form = $this->createForm('clarity_image_crop', array('uri' => $image->getSchemaPath()));
                     
                     return $this->render('ClarityImagesBundle:Image:crop_form.html.twig', array(
                         'form' => $form->createView(),
