@@ -59,6 +59,19 @@ public function registerBundles()
 }
 ```
 
+### Step 4) Import routing:
+``` yml
+# app/config/routing.yml
+
+# some routes can go here...
+clarity_images:
+    resource: "@ClarityImagesBundle/Resources/config/routing.xml"
+    prefix:   /
+
+# ... and some can go here. It's doesen't matter
+
+```
+
 <a name="usage"></a>
 
 ## Usage
