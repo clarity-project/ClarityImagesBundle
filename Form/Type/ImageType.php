@@ -3,11 +3,11 @@
 namespace Clarity\ImagesBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Clarity\ImagesBundle\Validator\Constraints\ContainsAlphanumeric;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -15,12 +15,12 @@ use Clarity\ImagesBundle\Validator\Constraints\ContainsAlphanumeric;
 class ImageType extends AbstractType
 {
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var Session
      */
     private $session;
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Session\Session $session
+     * @param Session $session
      */
     public function __construct(Session $session)
     {
@@ -30,7 +30,7 @@ class ImageType extends AbstractType
     /**
      * {@inheritDoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
             'strategy',
@@ -70,7 +70,7 @@ class ImageType extends AbstractType
 
         if (isset($options['in_collection'])) {
             $sessionData['destroy'] = !$options['in_collection'];
-        }        
+        }
 
         $this->session->set($uniqueKey, $sessionData);
         $view->vars['unique_key'] = $uniqueKey;
@@ -82,13 +82,13 @@ class ImageType extends AbstractType
      */
     public function getParent()
     {
-        return 'hidden';
+        return HiddenType::class;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'clarity_image';
     }
