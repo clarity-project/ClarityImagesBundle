@@ -3,8 +3,10 @@
 namespace Clarity\ImagesBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Zmicier Aliakseyeu <z.aliakseyeu@gmail.com>
@@ -17,18 +19,18 @@ class ImageUploadCropType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('uri', 'hidden', array('attr' => array('crop-input' => 'uri')))
-            ->add('x', 'hidden', array('attr' => array('crop-input' => 'x')))
-            ->add('y', 'hidden', array('attr' => array('crop-input' => 'y')))
-            ->add('w', 'hidden', array('attr' => array('crop-input' => 'w')))
-            ->add('h', 'hidden', array('attr' => array('crop-input' => 'h')))
+            ->add('uri', HiddenType::class, array('attr' => array('crop-input' => 'uri')))
+            ->add('x', HiddenType::class, array('attr' => array('crop-input' => 'x')))
+            ->add('y', HiddenType::class, array('attr' => array('crop-input' => 'y')))
+            ->add('w', HiddenType::class, array('attr' => array('crop-input' => 'w')))
+            ->add('h', HiddenType::class, array('attr' => array('crop-input' => 'h')))
         ;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'csrf_protection' => false,
@@ -40,13 +42,13 @@ class ImageUploadCropType extends AbstractType
      */
     public function getParent()
     {
-        return 'form';
+        return FormType::class;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'clarity_image_crop';
     }

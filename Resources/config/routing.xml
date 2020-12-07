@@ -4,11 +4,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="clarity_images_simple_image" pattern="/clarity-image/upload">
+    <route id="clarity_images_simple_image" path="/clarity-image/upload">
         <default key="_controller">ClarityImagesBundle:Image:simple</default>
     </route>
 
-    <route id="clarity_images_crop_image" pattern="/clarity-image/upload-crop">
+    <route id="clarity_images_crop_image" path="/clarity-image/upload-crop">
         <default key="_controller">ClarityImagesBundle:Image:crop</default>
     </route>
 </routes>

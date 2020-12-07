@@ -9,11 +9,13 @@
             "email": "z.aliakseyeu@gmail.com"
         }
     ],
-     
+
     "require": {
-        "symfony/framework-bundle": "~2.2",
+        "symfony/framework-bundle": ">=2.8",
+        "symfony/validator": ">=2.8",
+        "symfony/form": ">=2.8",
         "imagine/imagine": "v0.5.0",
-        "clarity-project/cdn-bundle": "dev-master"
+        "clarity-project/cdn-bundle": "v1.1"
     },
 
     "autoload": {
